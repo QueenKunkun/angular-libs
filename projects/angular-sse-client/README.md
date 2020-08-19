@@ -2,7 +2,7 @@
 
 This library is a wrapper for SSE ([Server-sent events - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events), An EventSource instance opens a persistent connection to an HTTP server, which sends events in text/event-stream format. The connection remains open until closed by calling EventSource.close().) in angular.
 
-NOTE: requires typescript 2.7+, see [Support 'EventSource' in lib.dom.d.ts · Issue #13666 · microsoft/TypeScript[2.1k,63.6k:63.6k,8.4k]](https://github.com/Microsoft/TypeScript/issues/13666 )
+NOTE: requires typescript 2.7+, see [Support 'EventSource' in lib.dom.d.ts · Issue #13666 · microsoft/TypeScript](https://github.com/Microsoft/TypeScript/issues/13666 )
 
 
 ## Supported Browsers

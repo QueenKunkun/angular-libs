@@ -12,13 +12,13 @@ export class SseClient {
   get(url: string, options: {
     withCredentials?: boolean,
     /**
-     * Close the event source on a period of time
+     * Complete the observable after a period of time automatically
      */
     duration?: number,
     /**
-     * Remove event source from cache when close it
+     * If set to true, keep event source open (i.e. will not close and keep it in a event source pool for reuse) after unsubscribing
      */
-    releaseWhenClose?: boolean,
+    keepOpenWhenUnsubscribe?: boolean,
   } = {}): Observable<any> {
     const subject = new Observable<any>(subscriber => {
       const sse = getEventSource(url, options);
@@ -29,18 +29,18 @@ export class SseClient {
       let stopped = false;
 
       /**
-       * stop listening event source, close and release event source if options.releaseWhenClose is true
+       * Stop listening to event source,
+       * close and release it if options.keepOpenWhenUnsubscribe is set to falsy
        */
       const _stop = function () {
         console.log('stop function entered');
         if (stopped) return;
         stopped = true;
-        console.log('stop function called');
 
         sse.removeEventListener('message', _onMessage);
         sse.removeEventListener('error', _onError);
 
-        if (options.releaseWhenClose === true) {
+        if (options.keepOpenWhenUnsubscribe !== true) {
           closeEventSource(url);
         }
       }

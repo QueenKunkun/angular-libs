@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AngularSseClientComponent } from './angular-sse-client.component';
+import { SseClientComponent } from './sse-client.component';
 
 describe('AngularSseClientComponent', () => {
-  let component: AngularSseClientComponent;
-  let fixture: ComponentFixture<AngularSseClientComponent>;
+  let component: SseClientComponent;
+  let fixture: ComponentFixture<SseClientComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AngularSseClientComponent ]
+      declarations: [ SseClientComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AngularSseClientComponent);
+    fixture = TestBed.createComponent(SseClientComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

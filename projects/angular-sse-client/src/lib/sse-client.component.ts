@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class AngularSseClientComponent implements OnInit {
+export class SseClientComponent implements OnInit {
 
   constructor() { }
 

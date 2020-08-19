@@ -1,63 +1,74 @@
 # AngularSseClient
 
-This library is a wrapper for SSE ([Server-sent events - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events), An EventSource instance opens a persistent connection to an HTTP server, which sends events in text/event-stream format. The connection remains open until closed by calling EventSource.close().) in angular.
+This library is a wrapper for SSE for angular.
 
-NOTE: requires typescript 2.7+, see [Support 'EventSource' in lib.dom.d.ts · Issue #13666 · microsoft/TypeScript](https://github.com/Microsoft/TypeScript/issues/13666 )
+
+What is SSE?
+
+> ([Server-sent events - Web APIs](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events), An EventSource instance opens a persistent connection to an HTTP server, which sends events in text/event-stream format. The connection remains open until closed by calling EventSource.close().).
+
+NOTE: 
+> This lib requires typescript 2.7+, see [Support 'EventSource' in lib.dom.d.ts · Issue #13666 · microsoft/TypeScript](https://github.com/Microsoft/TypeScript/issues/13666 )
 
 
 ## Supported Browsers
 
 See [EventSource#Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/API/EventSource#Browser_compatibility )
 
-NOTE: You may need to use a polyfill to make it work on more versions of browsers:
+NOTE: 
 
+> You may need to use a polyfill to make it work on more versions of browsers: 
 [EventSource/eventsource: EventSource client for Node.js and Browser (polyfill)](https://github.com/EventSource/eventsource )
 
 
 ## Usage
 
-Install the lib via:
+### Install
 
-`npm install angular-sse-clint --save`
+    `npm install angular-sse-clint --save`
 
-then in your code:
+### Code examples
 
-```ts
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.less']
-})
-export class AppComponent implements OnInit {
-  constructor(private sseClient: SseClient) {
-  }
+1. Inject the SseClient or create a new one as you like, then call the `get` method with SSE url:
 
-  ngOnInit(): void {
-    this.sseClient.get('http://localhost:8181/sse')
+    ```ts
+    @Component({
+      selector: 'app-root',
+      templateUrl: './app.component.html',
+      styleUrls: ['./app.component.less']
+    })
+    export class AppComponent implements OnInit {
+      constructor(private sseClient: SseClient) {
+      }
+
+      ngOnInit(): void {
+        this.sseClient.get('http://localhost:8181/sse')
+          .subscribe(data => {
+            console.log('got data from EventSource', data);
+          });
+      }
+    }
+    ```
+
+1. Listen to the event source for only amount of time, set `duration` in the options like so:
+
+    ```ts
+    this.sseClient.get('http://localhost:8181/sse', { duration: 5000 })
       .subscribe(data => {
         console.log('got data from EventSource', data);
       });
-  }
-}
-```
+    ```
 
-If you want to listen to the event source for only amount of time, set duration in the options, e.g. it will stop listening after 5000 miliseconds with below code:
+2. If you want to reuse the event source, set keepOpenWhenUnsubscribe to true:
 
-```ts
-this.sseClient.get('http://localhost:8181/sse', { duration: 5000 })
-  .subscribe(data => {
-    console.log('got data from EventSource', data);
-  });
-```
+    > This option is for the maxium connection limitation of SSE connections. See [SSE suffers from a limitation to the maximum number of open connections, which can be specially painful when opening various tabs as the limit is per browser and set to a very low number (6)](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
 
-If you want to keep the event source open, set keepOpenWhenUnsubscribe to true, so you can reuse the same EventSource in other components or services. This option is for the maxium connection limitation of SSE connections, see [SSE suffers from a limitation to the maximum number of open connections, which can be specially painful when opening various tabs as the limit is per browser and set to a very low number (6)](https://developer.mozilla.org/en-US/docs/Web/API/EventSource):
-
-```ts
-this.sseClient.get('http://localhost:8181/sse', { keepOpenWhenUnsubscribe: true })
-  .subscribe(data => {
-    console.log('got data from EventSource', data);
-  });
-```
+    ```ts
+    this.sseClient.get('http://localhost:8181/sse', { keepOpenWhenUnsubscribe: true })
+      .subscribe(data => {
+        console.log('got data from EventSource', data);
+      });
+    ```
 
 
 ## API

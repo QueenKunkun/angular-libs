@@ -4,6 +4,16 @@ This library is a wrapper for SSE ([Server-sent events - Web APIs | MDN](https:/
 
 NOTE: requires typescript 2.7+, see [Support 'EventSource' in lib.dom.d.ts · Issue #13666 · microsoft/TypeScript[2.1k,63.6k:63.6k,8.4k]](https://github.com/Microsoft/TypeScript/issues/13666 )
 
+
+## Supported Browsers
+
+See [EventSource#Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/API/EventSource#Browser_compatibility )
+
+NOTE: You may need to use a polyfill to make it work on more versions of browsers:
+
+[EventSource/eventsource: EventSource client for Node.js and Browser (polyfill)](https://github.com/EventSource/eventsource )
+
+
 ## Usage
 
 Install the lib via:

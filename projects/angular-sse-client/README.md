@@ -40,6 +40,16 @@ this.sseClient.get('http://localhost:8181/sse', { duration: 5000 })
   });
 ```
 
+If you want to keep the event source open, set keepOpenWhenUnsubscribe to true, so you can reuse the same EventSource in other components or services. This option is for the maxium connection limitation of SSE connections, see [SSE suffers from a limitation to the maximum number of open connections, which can be specially painful when opening various tabs as the limit is per browser and set to a very low number (6)](https://developer.mozilla.org/en-US/docs/Web/API/EventSource):
+
+```ts
+this.sseClient.get('http://localhost:8181/sse', { keepOpenWhenUnsubscribe: true })
+  .subscribe(data => {
+    console.log('got data from EventSource', data);
+  });
+```
+
+
 ## API
 
 ```ts

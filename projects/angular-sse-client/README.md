@@ -25,7 +25,7 @@ NOTE:
 
 ### Install
 
-    `npm install angular-sse-clint --save`
+    `npm install angular-sse-client --save`
 
 ### Code examples
 

@@ -3,5 +3,6 @@
  */
 
 export * from './lib/sse-client';
-export * from './lib/sse-client.component';
+// export * from './lib/sse-client.component';
 export * from './lib/sse-client.module';
+export * from './lib/event-source';

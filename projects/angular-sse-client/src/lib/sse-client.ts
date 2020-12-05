@@ -16,9 +16,13 @@ export class SseClient {
      */
     duration?: number,
     /**
-     * If set to true, keep event source open (i.e. will not close and keep it in a event source pool for reuse) after unsubscribing
+     * @deprecated use `keepAlive` instead
      */
     keepOpenWhenUnsubscribe?: boolean,
+    /**
+     * If set to true, keep event source open (i.e. will not close and keep it in an event source pool for reuse) after unsubscribing
+     */
+    keepAlive?: boolean,
   } = {}): Observable<any> {
     const subject = new Observable<any>(subscriber => {
       const sse = getEventSource(url, options);
@@ -30,17 +34,17 @@ export class SseClient {
 
       /**
        * Stop listening to event source,
-       * close and release it if options.keepOpenWhenUnsubscribe is set to falsy
+       * close and release it if options.keepAlive is set to falsy
        */
       const _stop = function () {
-        console.log('stop function entered');
+        // console.log('stop function entered');
         if (stopped) return;
         stopped = true;
 
         sse.removeEventListener('message', _onMessage);
         sse.removeEventListener('error', _onError);
 
-        if (options.keepOpenWhenUnsubscribe !== true) {
+        if (options.keepAlive !== true || options.keepOpenWhenUnsubscribe !== true) {
           closeEventSource(url);
         }
       }

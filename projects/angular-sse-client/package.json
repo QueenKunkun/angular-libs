@@ -1,6 +1,6 @@
 {
   "name": "angular-sse-client",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "peerDependencies": {
     "@angular/common": "^9.1.12",
     "@angular/core": "^9.1.12"
@@ -12,5 +12,5 @@
   "bugs": {
     "url": "https://github.com/QueenKunkun/angular-libs/issues"
   },
-  "homepage": "https://github.com/QueenKunkun/angular-libs/tree/master/projects/angular-sse-client"  
+  "homepage": "https://github.com/QueenKunkun/angular-libs/tree/master/projects/angular-sse-client"
 }

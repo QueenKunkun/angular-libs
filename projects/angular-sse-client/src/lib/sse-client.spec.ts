@@ -25,16 +25,19 @@ describe('SseClientService', () => {
     let SampleURL = 'http://localhost:8181/sse';
 
     var ob = service.get(SampleURL);
-
-    ob.subscribe(data => {
-      expect(data).toBeInstanceOf(Number);
-    }, err => {
-      expect(err).toBeTruthy();
-      done();
-    }, () => {
-      fail('should not complete regularly');
-      done();
-    });
+    
+    ob.subscribe(
+      data => {
+        expect(data).toBeInstanceOf(Number);
+      },
+      err => {
+        expect(err).toBeTruthy();
+        done();
+      },
+      () => {
+        fail('should not complete regularly');
+        done();
+      });
   });
 
   it('should get result and complete when timeout', function (done) {
